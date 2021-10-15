@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="./components/Rotation.js"></script>
+    <script src="./components/Coin.js"></script>
+  </head>
+
+  <body> 
+    <a-scene background="color:#026F90">
+      
+      <a-camera position = '0 10 20' wasd-controls-enabled = "false" ></a-camera>
+
+      <!--Asset Management-->
+      <a-assets timeout="10000">        
+        <a-asset-item
+          id="land"
+          src="./models/land/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+        id="coin"
+        src="./models/coin/scene.gltf">
+      </a-asset-item>
+        <a-asset-item id = 'player' src="./models/diver/scene.gltf"></a-asset-item>
+      </a-assets>
+      
+      <a-sky 
+      color = '#026F90'
+      animation="property: rotation; to: 0 300 0; easing:linear; loop: true; dur: 500000"
+      >
+      <!-- Terrain  -->
+      <a-entity
+        id="land"
+        gltf-model="#land"
+        position="0 0 0"
+        scale="0.035 0.035 0.035"
+        landRotation
+      >
+      <!-- Diver -->
+      <a-entity>
+        <a-entity 
+          diver-rotation-reader
+          id = "diver" 
+          gltf-model = '#player' 
+          position = '0 220 150' 
+          color = 'yellow'
+          rotation = '0 0 0' 
+          scale = '20 20 20'>
+        </a-entity>
+      </a-entity>   
+
+      <!-- Coin -->
+      <a-entity 
+      id = 'coins'
+      gltf-model = '#coin'
+      position='0 150 200'
+      scale = '10 10 10'
+      coinTarget
+      >
+      </a-entity>
+    </a-sky>   
+    </a-scene>
+  </body>
+</html>
+ 
